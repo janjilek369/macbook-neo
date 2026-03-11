@@ -1195,5 +1195,12 @@ p {
   .mac-compare-cards {
     display: block;
   }
+
+  .mac-compare-cta .btn {
+    display: block;
+    width: 100%;
+    white-space: normal;
+    line-height: 1.3;
+  }
 }
 
