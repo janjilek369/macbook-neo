@@ -645,9 +645,99 @@ p {
   font-size: 0.9rem;
 }
 
-.comparison-table__highlight {
-  background-color: rgba(34, 197, 94, 0.14);
+.comparison-table__cell {
+  background-color: #ffffff;
+}
+
+.comparison-table__neo,
+.comparison-table__cell--neo {
+  background-color: #fbfde8;
+}
+
+.comparison-table__neo {
+  position: relative;
+  border-top: 4px solid var(--accent-citrus);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+.comparison-table__badge {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: var(--accent-citrus);
+  color: var(--text-on-light);
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comparison-table__price-neo {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.comparison-cards {
+  display: none;
+  margin-top: 20px;
+  display: none;
+}
+
+.comparison-card {
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 18px 18px 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.comparison-card + .comparison-card {
+  margin-top: 16px;
+}
+
+.comparison-card--neo {
+  border-color: var(--accent-citrus);
+}
+
+.comparison-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+}
+
+.comparison-card__badge {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: var(--accent-citrus);
+  color: var(--text-on-light);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.comparison-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.comparison-card__list li + li {
+  margin-top: 6px;
+}
+
+.comparison-card__price span {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.comparison-card__summary {
+  margin-top: 10px;
 }
 
 .spec-table {
@@ -865,6 +955,16 @@ p {
 @media (min-width: 1200px) {
   .hero__title {
     font-size: 3.4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .comparison-table {
+    display: none;
+  }
+
+  .comparison-cards {
+    display: block;
   }
 }
 
