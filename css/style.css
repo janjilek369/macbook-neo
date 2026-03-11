@@ -196,6 +196,69 @@ main {
   color: var(--text-on-light);
 }
 
+.reviews-strip {
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: 48px 0;
+}
+
+.reviews-strip__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.reviews-strip__scroller {
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.reviews-strip__item {
+  min-width: 220px;
+  max-width: 320px;
+  padding-right: 14px;
+}
+
+.reviews-strip__media {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-citrus);
+  margin: 0 0 6px;
+}
+
+.reviews-strip__quote {
+  margin: 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #f5f5f5;
+}
+
+.reviews-strip__divider {
+  width: 1px;
+  background-color: #333333;
+  flex: 0 0 1px;
+}
+
+@media (min-width: 1024px) {
+  .reviews-strip__scroller {
+    overflow-x: visible;
+    justify-content: space-between;
+  }
+
+  .reviews-strip__item {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+}
+
 /* Typography */
 h1,
 h2,
