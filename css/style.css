@@ -380,58 +380,111 @@ p {
   left: 12px;
 }
 
-/* Header */
+/* Header & navigation */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  backdrop-filter: none;
   background: #1a1917;
-  padding: 8px 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 24px;
-  height: 64px;
-  width: 100%;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--text-on-dark);
 }
 
-.site-logo {
-  display: inline-flex;
+.nav__logo a {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+}
+
+.nav__links-wrapper {
+  display: flex;
   align-items: center;
+  gap: 16px;
 }
 
-.site-logo img {
-  height: 28px;
-  width: auto;
-  display: block;
+.nav__links {
+  list-style: none;
+  display: none;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.site-nav-link {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+.nav__links a {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav__links a:hover,
+.nav__links a:focus-visible {
+  color: var(--accent-citrus);
   text-decoration: none;
-  transition: color 0.2s;
 }
 
-.site-nav-link:hover {
-  color: #ffffff;
+.nav__cta {
+  display: none;
 }
 
-@media (max-width: 768px) {
-  .site-header {
-    padding: 6px 20px;
-    height: 56px;
-    gap: 16px;
+.nav__toggle {
+  background: none;
+  border: none;
+  padding: 4px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.nav__toggle-line {
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--text-on-dark);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav--open .nav__links {
+  display: flex;
+}
+
+.nav--open .nav__cta {
+  display: inline-flex;
+}
+
+.nav--open .nav__toggle-line:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.nav--open .nav__toggle-line:last-child {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .nav__links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
   }
 
-  .site-logo img {
-    height: 22px;
+  .nav__cta {
+    display: inline-flex;
   }
 
-  .site-nav-link {
-    font-size: 13px;
+  .nav__toggle {
+    display: none;
   }
 }
 
