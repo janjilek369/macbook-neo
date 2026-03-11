@@ -203,10 +203,23 @@ main {
 }
 
 .reviews-strip__title {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
   text-align: center;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
+  position: relative;
+}
+
+.reviews-strip__title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  background-color: #333333;
+  margin: 12px auto 0;
 }
 
 .reviews-strip__scroller {
@@ -247,6 +260,10 @@ main {
 }
 
 @media (min-width: 1024px) {
+  .reviews-strip__title {
+    font-size: 1rem;
+  }
+
   .reviews-strip__scroller {
     overflow-x: visible;
     justify-content: space-between;
