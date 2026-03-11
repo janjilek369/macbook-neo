@@ -386,8 +386,11 @@ p {
   top: 0;
   z-index: 100;
   background: #1a1917;
-  padding: 0 40px;
-  display: block;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
   height: 64px;
   width: 100%;
 }
@@ -395,7 +398,6 @@ p {
 .site-logo {
   display: inline-flex;
   align-items: center;
-  height: 64px;
 }
 
 .site-logo img {
@@ -405,13 +407,12 @@ p {
 }
 
 .site-nav-link {
-  display: block;
+  display: inline-block;
   font-size: 14px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.2s;
-  margin-top: -10px;
 }
 
 .site-nav-link:hover {
@@ -420,8 +421,9 @@ p {
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 0 20px;
+    padding: 6px 20px;
     height: 56px;
+    gap: 16px;
   }
 
   .site-logo img {
@@ -430,7 +432,6 @@ p {
 
   .site-nav-link {
     font-size: 13px;
-    margin-top: -6px;
   }
 }
 
