@@ -460,10 +460,6 @@ p {
   display: flex;
 }
 
-.nav--open .nav__cta {
-  display: inline-flex;
-}
-
 .nav--open .nav__toggle-line:first-child {
   transform: translateY(3px) rotate(45deg);
 }
