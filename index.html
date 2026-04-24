@@ -1177,14 +1177,21 @@
 
     <script src="js/main.js" defer></script>
 
-    <!-- Cookie Consent Banner — STATIC HTML, direct children of body (Safari iOS safe) -->
-    <div id="consent-overlay" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:99998;"></div>
-    <div id="consent-banner" role="dialog" aria-label="Souhlas s cookies" style="display:none;position:fixed;bottom:20px;left:16px;right:16px;z-index:99999;background:#1a1a1a;border:1px solid #444;border-radius:12px;padding:24px;">
-      <p style="font-size:14px;line-height:1.6;color:#ccc;margin:0 0 20px 0;padding:0;">Tento web měří návštěvnost, abychom věděli, co vám pomáhá. Bez vašeho souhlasu neměříme.</p>
-      <button type="button" id="consent-btn-accept" style="display:block;width:100%;padding:13px 16px;background:#D4E157;color:#111;border:0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin:0 0 10px 0;font-family:inherit;">Souhlasím</button>
-      <button type="button" id="consent-btn-deny" style="display:block;width:100%;padding:13px 16px;background:transparent;color:#ccc;border:1px solid #555;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin:0 0 16px 0;font-family:inherit;">Pouze nezbytné</button>
-      <a href="https://modernivyuka.digital/zasady-zpracovani" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#888;text-decoration:underline;">Zásady zpracování →</a>
-    </div>
+    <!-- Cookie Consent Dialog — native <dialog> element (top layer, Safari iOS 15.4+ safe) -->
+    <style>
+      #consent-dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:auto;height:auto;margin:0;overflow:visible;color:inherit;}
+      #consent-dialog::backdrop{background:rgba(0,0,0,0.55);}
+      #consent-dialog .consent-box{position:fixed;left:16px;right:16px;bottom:20px;background:#1a1a1a;border:1px solid #444;border-radius:12px;padding:24px;color:#ccc;font-family:'DM Sans',sans-serif;}
+      @media(min-width:520px){#consent-dialog .consent-box{left:50%;right:auto;width:488px;margin-left:-244px;}}
+    </style>
+    <dialog id="consent-dialog" aria-label="Souhlas s cookies">
+      <div class="consent-box">
+        <p style="font-size:14px;line-height:1.6;color:#ccc;margin:0 0 20px 0;padding:0;">Tento web měří návštěvnost, abychom věděli, co vám pomáhá. Bez vašeho souhlasu neměříme.</p>
+        <button type="button" id="consent-btn-accept" style="display:block;width:100%;padding:13px 16px;background:#D4E157;color:#111;border:0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin:0 0 10px 0;font-family:inherit;">Souhlasím</button>
+        <button type="button" id="consent-btn-deny" style="display:block;width:100%;padding:13px 16px;background:transparent;color:#ccc;border:1px solid #555;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin:0 0 16px 0;font-family:inherit;">Pouze nezbytné</button>
+        <a href="https://modernivyuka.digital/zasady-zpracovani" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#888;text-decoration:underline;">Zásady zpracování →</a>
+      </div>
+    </dialog>
 
     <script>
       /* ── CONSENT HELPERS ── */
@@ -1200,36 +1207,32 @@
       /* ── FIRE ON EXISTING CONSENT ── */
       if(_consent_get()==='accepted'){_load_gtm();_load_posthog();}
 
-      /* ── BANNER (static HTML — just toggle display) ── */
+      /* ── DIALOG SHOW/HIDE ── */
       function showConsentBanner(){
-        var ov=document.getElementById('consent-overlay');
-        var bn=document.getElementById('consent-banner');
-        if(ov)ov.style.display='block';
-        if(bn)bn.style.display='block';
+        var dlg=document.getElementById('consent-dialog');
+        if(!dlg)return;
+        if(typeof dlg.showModal==='function'){
+          try{dlg.showModal();}catch(e){dlg.setAttribute('open','');}
+        }else{
+          /* Fallback for old browsers (Safari iOS < 15.4) */
+          dlg.setAttribute('open','');
+          dlg.style.cssText='display:block;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:2147483647;';
+        }
       }
       function hideConsentBanner(){
-        var ov=document.getElementById('consent-overlay');
-        var bn=document.getElementById('consent-banner');
-        if(ov)ov.style.display='none';
-        if(bn)bn.style.display='none';
+        var dlg=document.getElementById('consent-dialog');
+        if(!dlg)return;
+        if(typeof dlg.close==='function'&&dlg.open){try{dlg.close();}catch(e){}}
+        dlg.removeAttribute('open');
+        dlg.style.cssText='';
       }
 
-      /* ── ATTACH BUTTON HANDLERS ── */
+      /* ── BUTTON HANDLERS ── */
       (function(){
-        var acceptBtn=document.getElementById('consent-btn-accept');
-        var denyBtn=document.getElementById('consent-btn-deny');
-        if(acceptBtn){
-          acceptBtn.addEventListener('click',function(){
-            _consent_set('accepted');
-            window.location.reload();
-          });
-        }
-        if(denyBtn){
-          denyBtn.addEventListener('click',function(){
-            _consent_set('denied');
-            hideConsentBanner();
-          });
-        }
+        var a=document.getElementById('consent-btn-accept');
+        var d=document.getElementById('consent-btn-deny');
+        if(a){a.addEventListener('click',function(){_consent_set('accepted');window.location.reload();});}
+        if(d){d.addEventListener('click',function(){_consent_set('denied');hideConsentBanner();});}
       })();
 
       /* ── RESET (patička — Nastavení cookies) ── */
@@ -1239,12 +1242,11 @@
       }
 
       /* ── SHOW ON FIRST VISIT ── */
-      if(_consent_get()==='unset'){
-        if(document.readyState==='loading'){
-          document.addEventListener('DOMContentLoaded',function(){setTimeout(showConsentBanner,400);});
-        }else{
-          setTimeout(showConsentBanner,400);
-        }
+      function _consent_maybe_show(){if(_consent_get()==='unset'){setTimeout(showConsentBanner,300);}}
+      if(document.readyState==='loading'){
+        document.addEventListener('DOMContentLoaded',_consent_maybe_show);
+      }else{
+        _consent_maybe_show();
       }
     </script>
   </body>
