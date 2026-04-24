@@ -1206,16 +1206,16 @@
         bn.id='consent-banner';
         bn.setAttribute('role','dialog');
         bn.setAttribute('aria-label','Souhlas s cookies');
-        bn.style.cssText='position:fixed;bottom:20px;left:16px;right:16px;z-index:99999;background:#1a1a1a;border:1px solid #444;border-radius:12px;padding:24px;box-shadow:0 4px 32px rgba(0,0,0,0.6);max-width:480px;margin-left:auto;margin-right:auto;';
+        /* Safari iOS fix: NO max-width+margin:auto+left+right combo — causes zero-width bug */
+        bn.style.cssText='position:fixed;bottom:20px;left:16px;right:16px;z-index:99999;background:#1a1a1a;border:1px solid #444;border-radius:12px;padding:24px;box-shadow:0 4px 32px rgba(0,0,0,0.6);';
         bn.innerHTML=
           '<p style="font-size:14px;line-height:1.6;color:#ccc;margin:0 0 20px;">'+
             'Tento web měří návštěvnost, abychom věděli, co vám pomáhá. '+
             'Bez vašeho souhlasu neměříme.'+
           '</p>'+
-          '<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">'+
-            '<button id="consent-btn-accept" style="display:block;width:100%;padding:13px 16px;background:#D4E157;color:#111111;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;">Souhlasím</button>'+
-            '<button id="consent-btn-deny" style="display:block;width:100%;padding:13px 16px;background:transparent;color:#ccc;border:1px solid #555;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;">Pouze nezbytné</button>'+
-          '</div>'+
+          /* Safari iOS fix: NO flex gap — use margin-bottom on each button instead */
+          '<button id="consent-btn-accept" style="display:block;width:100%;padding:13px 16px;background:#D4E157;color:#111111;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin-bottom:10px;">Souhlasím</button>'+
+          '<button id="consent-btn-deny" style="display:block;width:100%;padding:13px 16px;background:transparent;color:#ccc;border:1px solid #555;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;box-sizing:border-box;margin-bottom:16px;">Pouze nezbytné</button>'+
           '<a href="https://modernivyuka.digital/zasady-zpracovani" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#888;text-decoration:underline;">Zásady zpracování →</a>';
         document.body.appendChild(bn);
 
