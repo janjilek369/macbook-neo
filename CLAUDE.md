@@ -48,5 +48,6 @@ Sections alternate between `.section--dark` and `.section--light` / `.section--l
 
 ## Analytics
 
-- **Google Tag Manager** (`GTM-T5KMZK7N`) fires unconditionally in `<head>` and `<body>`.
-- **PostHog** (`phc_RbHhnxuybJ4wzfj54sYxNWphCqdf9ly1N32c5yXzh1d`) is initialized only after cookie consent is given (do not load it unconditionally).
+- **Google Tag Manager** (`GTM-T5KMZK7N`) loads only after cookie consent (the consent script at the bottom of `index.html` gates it).
+- PostHog was removed in August 2026 (unused). Do not re-add it.
+- `.vercelignore` keeps CLAUDE.md, the old brief and `.claude/` out of the deployed site — keep it that way.
