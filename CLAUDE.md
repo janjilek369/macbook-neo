@@ -14,7 +14,7 @@ Opens the site at `http://localhost:3333`. No build step or package manager — 
 
 Single-page marketing website in Czech targeting schools/educators. Three files carry all the content and behavior:
 
-- **`index.html`** — All content (1,200+ lines). Each section has a unique `id` used for anchor navigation. Sections appear in order: hero → features → reviews strip → school leadership → TCO analysis → Windows-to-Mac transition → compatibility → Mac Průvodce → repairability → ecosystem → Mac comparison table → teacher references → final CTA.
+- **`index.html`** — All content (1,200+ lines). Each section has a unique `id` used for anchor navigation. Sections appear in order: hero → features → teacher feedback (stats + quote wall) → school leadership → TCO analysis → Windows-to-Mac transition → compatibility → Mac Průvodce → repairability → ecosystem → Mac comparison table → teacher references → final CTA.
 - **`css/style.css`** — Minified. All design tokens live in `:root` CSS custom properties. Mobile-first with breakpoints at 768px, 1024px, and 1200px. The `.reveal` / `.reveal--visible` class pair drives scroll-triggered fade-ins.
 - **`js/main.js`** — Minified (~1.3 KB). Four responsibilities: sticky header (`site-header--scrolled` class), hamburger menu (`nav--open` class + `aria-expanded`), smooth anchor scroll, and the Intersection Observer for `.reveal` elements.
 
@@ -42,7 +42,6 @@ Sections alternate between `.section--dark` and `.section--light` / `.section--l
 ## Key External Links
 
 - **Primary CTA** (konfigurátor): `konfigurator-pi.vercel.app`
-- **Teacher survey results**: `anketa-vysledky.vercel.app`
 - **TCO calculator**: `tco-kalkulacka.vercel.app`
 - **Mac guide for teachers**: `macpruvodce.cz`
 - **Shop**: `obchod.24u.cz/pro-skoly`
