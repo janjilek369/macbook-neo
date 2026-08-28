@@ -14,7 +14,7 @@ Opens the site at `http://localhost:3333`. No build step or package manager — 
 
 Single-page marketing website in Czech targeting schools/educators. Three files carry all the content and behavior:
 
-- **`index.html`** — All content (1,200+ lines). Each section has a unique `id` used for anchor navigation. Sections appear in order: hero → features → teacher feedback (stats + quote wall) → school leadership → TCO analysis → Windows-to-Mac transition → compatibility → Mac Průvodce → repairability → ecosystem → Mac comparison table → teacher references → final CTA.
+- **`index.html`** — All content (1,200+ lines). Each section has a unique `id` used for anchor navigation. Sections appear in order: hero → proof band (project stats + 3 quotes + data provenance) → leadership branch (light, 8 objection/answer "lék" rows) → teacher branch (dark, 10 "lék" rows + free-loan CTA) → Neo vs Air M5 comparison → final CTA. Each "lék" row = quoted objection (serif italic) + answer + proof (named teacher quote or stat). All quotes are verbatim questionnaire answers used with named consent.
 - **`css/style.css`** — Minified. All design tokens live in `:root` CSS custom properties. Mobile-first with breakpoints at 768px, 1024px, and 1200px. The `.reveal` / `.reveal--visible` class pair drives scroll-triggered fade-ins.
 - **`js/main.js`** — Minified (~1.3 KB). Four responsibilities: sticky header (`site-header--scrolled` class), hamburger menu (`nav--open` class + `aria-expanded`), smooth anchor scroll, and the Intersection Observer for `.reveal` elements.
 
