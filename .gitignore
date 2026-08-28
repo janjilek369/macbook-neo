@@ -1,0 +1,14 @@
+# Data ze zpětné vazby učitelů (osobní údaje, nesmí do repozitáře)
+*.xlsx
+*.xls
+*.csv
+*_feedback.*
+
+# macOS
+.DS_Store
+
+# Prostředí a závislosti
+.env
+.env.*
+node_modules/
+.vercel/
